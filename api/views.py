@@ -31,11 +31,15 @@ class ProductListAPIView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-@api_view(['GET'])
-def product_detail(request, pk):
-    product = get_object_or_404(Product,id=pk)
-    serializer = ProductSerializer(product)
-    return Response(serializer.data)  
+# @api_view(['GET'])
+# def product_detail(request, pk):
+#     product = get_object_or_404(Product,id=pk)
+#     serializer = ProductSerializer(product)
+#     return Response(serializer.data)  
+
+class ProductDetailAPIView(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 # class ProductDetail(generics.RetrieveAPIView):
 #     queryset = Product.objects.all()
