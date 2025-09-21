@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from .serializers import ProductSerializer, OrderItemSerializer, OrderSerializer, ProductInfoSerializer
 from .models import Product, Order, OrderItem
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -15,11 +15,11 @@ from rest_framework.decorators import api_view
 #         'data': serializer.data
 #     })
 
-@api_view(['GET'])
-def product_list(request):
-    products = Product.objects.all()
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# def product_list(request):
+#     products = Product.objects.all()
+#     serializer = ProductSerializer(products, many=True)
+#     return Response(serializer.data)
 
 # class ProductList(APIView):
 #     def get(self, request):
@@ -27,9 +27,9 @@ def product_list(request):
 #         serializer = ProductSerializer(products, many=True)
 #         return JsonResponse({'data': serializer.data})
 
-# class ProductList(ListAPIView):
-#     queryset = Product.objects.all()
-#     serializer_class = ProductSerializer
+class ProductListAPIView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 @api_view(['GET'])
 def product_detail(request, pk):
@@ -37,7 +37,7 @@ def product_detail(request, pk):
     serializer = ProductSerializer(product)
     return Response(serializer.data)  
 
-# class ProductDetail(RetrieveAPIView):
+# class ProductDetail(generics.RetrieveAPIView):
 #     queryset = Product.objects.all()
 #     serializer_class = ProductSerializer 
 
