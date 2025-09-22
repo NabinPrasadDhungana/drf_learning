@@ -28,8 +28,13 @@ from rest_framework.decorators import api_view
 #         return JsonResponse({'data': serializer.data})
 
 class ProductListAPIView(generics.ListAPIView):
-    queryset = Product.objects.all()
+    # queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        # retrieve only the products whose stock is greater than 0.
+        products = Product.objects.all()
+        return [product for product in products if product.stock>0]
 
 # @api_view(['GET'])
 # def product_detail(request, pk):
