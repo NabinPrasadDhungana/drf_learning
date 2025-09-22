@@ -58,11 +58,15 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
 #         serializer = ProductSerializer(product)
 #         return Response(serializer.data)
 
-@api_view(['GET'])
-def order_list(request):
-    orders = Order.objects.all()
-    serializer = OrderSerializer(orders, many=True)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# def order_list(request):
+#     orders = Order.objects.all()
+#     serializer = OrderSerializer(orders, many=True)
+#     return Response(serializer.data)
+
+class OrderListAPIView(generics.ListAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
 @api_view(['GET'])
 def product_info(request):
