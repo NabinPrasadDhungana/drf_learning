@@ -28,15 +28,15 @@ from rest_framework.permissions import IsAuthenticated
 #         serializer = ProductSerializer(products, many=True)
 #         return JsonResponse({'data': serializer.data})
 
-class ProductListAPIView(generics.ListAPIView):
-    # queryset = Product.objects.all()
-    def get_queryset(self):
-        # retrieve only the products whose stock is greater than 0.
-        products = Product.objects.all()
-        return [product for product in products if product.stock>0]
-    # OR Do:
-    # queryset = Product.objects.filter(stock__gt=0)
-    serializer_class = ProductSerializer
+# class ProductListAPIView(generics.ListAPIView):
+#     # queryset = Product.objects.all()
+#     def get_queryset(self):
+#         # retrieve only the products whose stock is greater than 0.
+#         products = Product.objects.all()
+#         return [product for product in products if product.stock>0]
+#     # OR Do:
+#     # queryset = Product.objects.filter(stock__gt=0)
+#     serializer_class = ProductSerializer
 
 
 # @api_view(['GET'])
@@ -100,10 +100,22 @@ class ProductInfoAPIView(APIView):
 #     })
 #     return Response(serializer.data)
 
-class CreateProductAPIView(generics.CreateAPIView):
+class ProductListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
-    model = Product
+    queryset = Product.objects.all()
 
-    def create(self, request, *args, **kwargs):
-        print(request.data)
-        return super().create(request, *args, **kwargs)
+    # def list(self, request, *args, **kwargs):
+    #     return super().list(request, *args, **kwargs)
+
+    # def create(self, request, *args, **kwargs):
+    #     print(request.data)
+    #     return super().create(request, *args, **kwargs)
+
+# class CreateProductAPIView(generics.CreateAPIView):
+#     serializer_class = ProductSerializer
+#     model = Product
+
+#     def create(self, request, *args, **kwargs):
+#         print(request.data)
+#         return super().create(request, *args, **kwargs)
+
