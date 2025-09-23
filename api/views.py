@@ -115,7 +115,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
 #     serializer_class = ProductSerializer
 #     model = Product
 
-#     def create(self, request, *args, **kwargs):
+#     def create(self, request, *args, **kwargs): # This function in the current context is not necessary unless you want to customize the creation behavior.
 #         print(request.data)
 #         return super().create(request, *args, **kwargs)
 
