@@ -4,10 +4,21 @@ GET http://127.0.0.1:8000/products/ HTTP/1.1
 
 POST http://localhost:8000/products/ HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4ODE3NTkzLCJpYXQiOjE3NTg4MTcyOTMsImp0aSI6ImM1OTlhYmY2YWJlNzQ0ZDhhYjU0M2JhZTEzOTEzMzM0IiwidXNlcl9pZCI6IjIifQ.gaQ_giNyhKkQS65XTiKSR9Mp2Y3XmovtRcEpL8TqCwc
+
 
 {
-"name": "Light Bulb",
-"price": 30.00,
-"stock": 16,
-"description": "An amazing new Light Bulb"
+"name": "Table",
+"price": 49.99,
+"stock": 23,
+"description": "An amazing new table"
+}
+
+###
+POST http://localhost:8000/api/token/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "nabinprasad",
+    "password": "986348"
 }
