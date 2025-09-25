@@ -49,9 +49,15 @@ from rest_framework.permissions import (
 #     serializer = ProductSerializer(product)
 #     return Response(serializer.data)  
 
-class ProductDetailAPIView(generics.RetrieveAPIView):
+class ProductRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    def get_permissions(self):
+        self.permission_classes = [AllowAny]
+        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+            self.permission_classes = [IsAdminUser]
+        return super().get_permissions()
 
 # class ProductDetail(generics.RetrieveAPIView):
 #     queryset = Product.objects.all()
@@ -128,8 +134,3 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
 #     def create(self, request, *args, **kwargs): # This function in the current context is not necessary unless you want to customize the creation behavior.
 #         print(request.data)
 #         return super().create(request, *args, **kwargs)
-
-class ProductUpdateAPIView(generics.RetrieveUpdateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [IsAdminUser]
