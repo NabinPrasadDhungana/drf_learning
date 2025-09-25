@@ -129,7 +129,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
 #         print(request.data)
 #         return super().create(request, *args, **kwargs)
 
-class ProductUpdateAPIView(generics.DestroyAPIView):
+class ProductUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [IsAdminUser]
