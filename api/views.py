@@ -113,6 +113,11 @@ class ProductInfoAPIView(APIView):
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
+    # filterset_fields = ['name', 'price']
+    filterset_fields = {
+        'name': ['iexact', 'icontains'],
+        'price': ['lt', 'gt', 'range'],
+    }
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
