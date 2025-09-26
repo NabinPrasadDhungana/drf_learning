@@ -12,6 +12,8 @@ from rest_framework.permissions import (
     AllowAny,
     IsAdminUser,
 )
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 # def product_list(request):
 #     products = Product.objects.all()
@@ -114,10 +116,12 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
     # filterset_fields = ['name', 'price']
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = {
         'name': ['iexact', 'icontains'],
         'price': ['lt', 'gt', 'range'],
     }
+    search_fields = ['name', 'description']
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
