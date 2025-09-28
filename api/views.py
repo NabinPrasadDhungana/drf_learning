@@ -121,6 +121,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
         DjangoFilterBackend,
         filters.SearchFilter,
         filters.OrderingFilter,
+        InStockFilterBackend,
     ]
     filterset_fields = {
         'name': ['iexact', 'icontains'],
