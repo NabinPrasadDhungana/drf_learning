@@ -126,7 +126,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
         'price': ['lt', 'gt', 'range'],
     }
 
-    search_fields = ['name', 'description']
+    search_fields = ['=name', 'description'] # This =name finds the exact match of the searched string in the name field of the existing products, and description still has icontains search property
     ordering_fields = ['name', 'price', 'stock']
 
     def get_permissions(self):
