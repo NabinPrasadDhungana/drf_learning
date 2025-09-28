@@ -2,6 +2,6 @@ import django_filters
 from .models import Product
 from rest_framework import filters
 
-class InStovkFilterBackend(filters.BaseFilterBackend):
+class InStockFilterBackend(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
         return queryset.filter(stock__gt=0)

@@ -14,6 +14,7 @@ from rest_framework.permissions import (
 )
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from .filters import InStockFilterBackend
 
 # def product_list(request):
 #     products = Product.objects.all()
