@@ -80,7 +80,7 @@ class ProductRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
 #     return Response(serializer.data)
 
 class OrderListAPIView(generics.ListAPIView):
-    queryset = Order.objects.prefetch_related('items__product')
+    queryset = Order.objects.prefetch_related('items__product').order_by('pk')
     serializer_class = OrderSerializer
 
 class UserOrderListAPIView(generics.ListAPIView):
