@@ -15,6 +15,7 @@ from rest_framework.permissions import (
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from .filters import InStockFilterBackend
+from rest_framework.pagination import PageNumberPagination
 
 # def product_list(request):
 #     products = Product.objects.all()
@@ -130,6 +131,12 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
 
     search_fields = ['=name', 'description'] # This =name finds the exact match of the searched string in the name field of the existing products, and description still has icontains search property
     ordering_fields = ['name', 'price', 'stock']
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 4
+    pagination_class.max_page_size = 7
+    pagination_class.page_query_param = 'pagenum'
+    pagination_class.page_size_query_param = 'size'
+
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
