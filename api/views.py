@@ -84,7 +84,7 @@ class OrderListAPIView(generics.ListAPIView):
     serializer_class = OrderSerializer
 
 class UserOrderListAPIView(generics.ListAPIView):
-    queryset = Order.objects.prefetch_related('items__product')
+    queryset = Order.objects.prefetch_related('items__product').order_by('pk')
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
 
