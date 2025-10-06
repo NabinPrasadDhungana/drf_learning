@@ -115,7 +115,7 @@ class ProductInfoAPIView(APIView):
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
-    queryset = Product.objects.all()
+    queryset = Product.objects.order_by('pk')
     # filterset_fields = ['name', 'price']
     filter_backends = [
         DjangoFilterBackend,
