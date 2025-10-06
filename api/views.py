@@ -16,6 +16,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from .filters import InStockFilterBackend
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
+from rest_framework import viewsets
 
 # def product_list(request):
 #     products = Product.objects.all()
@@ -79,9 +80,13 @@ class ProductRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
 #     serializer = OrderSerializer(orders, many=True)
 #     return Response(serializer.data)
 
-class OrderListAPIView(generics.ListAPIView):
+class OrderListAPIViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.prefetch_related('items__product').order_by('pk')
     serializer_class = OrderSerializer
+
+# class OrderListAPIView(generics.ListAPIView):
+#     queryset = Order.objects.prefetch_related('items__product').order_by('pk')
+#     serializer_class = OrderSerializer
 
 class UserOrderListAPIView(generics.ListAPIView):
     queryset = Order.objects.prefetch_related('items__product').order_by('pk')
