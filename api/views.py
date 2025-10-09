@@ -1,22 +1,19 @@
-from django.http import JsonResponse
 from django.db.models import Max
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from .serializers import ProductSerializer, OrderItemSerializer, OrderSerializer, ProductInfoSerializer
-from .models import Product, Order, OrderItem
-from rest_framework.views import APIView
-from rest_framework import generics, status
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from rest_framework.permissions import (
-    IsAuthenticated,
-    AllowAny,
-    IsAdminUser,
-)
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters
+from rest_framework import filters, generics, status, viewsets
+from rest_framework.decorators import api_view
+from rest_framework.pagination import (LimitOffsetPagination,
+                                       PageNumberPagination)
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .filters import InStockFilterBackend, OrderFilter
-from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
-from rest_framework import viewsets
+from .models import Order, OrderItem, Product
+from .serializers import (OrderItemSerializer, OrderSerializer,
+                          ProductInfoSerializer, ProductSerializer)
 
 # def product_list(request):
 #     products = Product.objects.all()
