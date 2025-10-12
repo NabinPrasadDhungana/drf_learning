@@ -93,6 +93,12 @@ class OrderViewSet(viewsets.ModelViewSet):
         orders = self.get_queryset().filter(user=request.user)
         serializer = self.get_serializer(orders, many=True)
         return Response(serializer.data)
+    
+    # @action(detail=False, methods=['POST'], url_path='create-orders')
+    def list(self, request):
+        orders = self.get_queryset()
+        serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data)
 
 # class OrderListAPIView(generics.ListAPIView):
 #     queryset = Order.objects.prefetch_related('items__product').order_by('pk')
